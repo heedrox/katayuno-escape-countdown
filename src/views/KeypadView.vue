@@ -1,17 +1,17 @@
 <template>
-  <escape-countdown class="main-countdown"></escape-countdown>
+  <escape-keypad class="main-keypad"></escape-keypad>
 </template>
 <style>
-  .main-countdown {
+  .main-keypad {
     width: 100%;
   }
 </style>
 <script>
-  import EscapeCountdown from '../components/Countdown.vue'
+  import EscapeKeypad from '../components/Keypad.vue'
 
   export default {
     components: {
-      EscapeCountdown
+      EscapeKeypad
     }
   }
 </script>
