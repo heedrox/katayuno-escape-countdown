@@ -17,6 +17,7 @@ const mouseClickOnXY = (x, y) => {
 const CLICK_1 = mouseClickOnXY(150, 136)
 const CLICK_5 = mouseClickOnXY(190, 180)
 const CLICK_E = mouseClickOnXY(150, 260)
+// const SECRET_NUMBER = [mouseClickOnXY(x, x), mouseClickOnXY(x, x), mouseClickOnXY(x, x), mouseClickOnXY(x, x)]
 
 describe('Keypad.vue', () => {
   let wrapper
@@ -79,5 +80,29 @@ describe('Keypad.vue', () => {
     wrapper.vm.keypadClick(CLICK_E)
 
     expect(vm.combination).to.equal('')
+  })
+  describe('checks combination', () => {
+    it('checks when length<4', () => {
+      wrapper.vm.keypadClick(CLICK_1)
+      wrapper.vm.keypadClick(CLICK_5)
+
+      expect(vm.wrongNumber).to.equal(false)
+      expect(vm.rightNumber).to.equal(false)
+    })
+    it('checks when wrong', () => {
+      wrapper.vm.keypadClick(CLICK_1)
+      wrapper.vm.keypadClick(CLICK_5)
+      wrapper.vm.keypadClick(CLICK_1)
+      wrapper.vm.keypadClick(CLICK_5)
+
+      expect(vm.wrongNumber).to.equal(true)
+    })
+    /* it('checks when right', () => {
+      SECRET_NUMBER.forEach((click) => {
+        wrapper.vm.keypadClick(click)
+      })
+
+      expect(vm.rightNumber).to.equal(true)
+    }) */
   })
 })

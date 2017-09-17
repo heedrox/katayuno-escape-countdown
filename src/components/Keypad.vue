@@ -1,6 +1,6 @@
 <template>
   <div class="keypad">
-    <input size="8" id="keypadValue" v-model="combination">
+    <input v-bind:class="{ 'danger': wrongNumber, 'success': rightNumber }" size="8" readonly id="keypadValue" v-model="combination">
     <img id="keypadImage" src="../assets/keypad.png" v-on:click="keypadClick">
   </div>
 </template>
@@ -30,6 +30,14 @@
     text-shadow: 0 0 0 gray;
   }
 
+  .keypad input.danger {
+    background-color: #990000;
+  }
+
+  .keypad input.success {
+    background-color: #009900;
+  }
+
   .keypad img {
     display: block;
     height: 65vh;
@@ -41,6 +49,7 @@
 
 
 <script>
+  import bcrypt from 'bcryptjs'
 
   const getValueBasedOnRowAndCol = (rowcol) => {
     switch (rowcol.join('')) {
@@ -89,7 +98,9 @@
     name: 'escape-keypad',
     data () {
       return {
-        combination: ''
+        combination: '',
+        wrongNumber: false,
+        rightNumber: false
       }
     },
     methods: {
@@ -102,6 +113,22 @@
         } else if (this.combination.length < 4) {
           this.combination = this.combination + value + ''
         }
+        this.checkCombination()
+      },
+      checkCombination () {
+        if (this.isOk(this.combination)) {
+          this.rightNumber = true
+          this.wrongNumber = false
+        } else if ((this.combination.length === 4)) {
+          this.wrongNumber = true
+          this.rightNumber = false
+        } else {
+          this.wrongNumber = false
+          this.rightNumber = false
+        }
+      },
+      isOk (value) {
+        return bcrypt.compareSync(value, '$2a$08$GnZouCpA1PtQ6MzfqkjnseGijHbkk7iCBvTiH3lCKXcte6N/xEh7O')
       }
     }
   }
