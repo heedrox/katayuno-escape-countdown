@@ -18,10 +18,12 @@ html {
 }
 
 body {
+  background: #000;
   display: flex;
   justify-content: center;
   margin: 0;
   height: 100%;
+
 }
 
 #app {
