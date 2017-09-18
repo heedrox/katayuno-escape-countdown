@@ -1,17 +1,44 @@
 <template>
-  <div class="keypad">
-    <input v-bind:class="{ 'danger': wrongNumber, 'success': rightNumber }" size="8" readonly id="keypadValue" v-model="combination">
-    <img id="keypadImage" src="../assets/keypad.png" v-on:click="keypadClick">
+  <div>
+    <div class="under-door">
+      <p>¡Enhorabuena!</p>
+      <p>Has demostrado ser un buen agente.<br/>
+      Abre ahora el sobre 2.<br/><br/>
+      ¡Date prisa, el tiempo se acaba!</p>
+    </div>
+    <transition name="slide-fade">
+      <div v-if="!openDoor" class="keypad">
+        <input v-bind:class="{ 'danger': wrongNumber, 'success': rightNumber }" size="8" readonly id="keypadValue" v-model="combination">
+        <img id="keypadImage" src="../assets/keypad.png" v-on:click="keypadClick">
+      </div>
+    </transition>
   </div>
 </template>
 <style scoped>
   @import url(https://fonts.googleapis.com/css?family=VT323:400);
 
+  .under-door {
+    background: #fff;
+    position: absolute;
+    top:0px;
+    z-index:2;
+    width:100%;
+    height:100%;
+  }
+  .under-door p {
+    padding-top: 10vh;
+    font-size: 6vw;
+  }
   .keypad {
+    z-index:10;
+    position:absolute;
+    width:100%;
+    height:85vh;
     background: #000;
     font-family: 'VT323', serif;
     color: #efefef;
     padding-top: 15vh;
+    top:0px;
   }
 
   .keypad input {
@@ -43,6 +70,17 @@
     height: 65vh;
     margin: auto;
 
+  }
+
+  /* Enter and leave animations can use different */
+  /* durations and timing functions.              */
+  .slide-fade-enter-active {
+  }
+  .slide-fade-leave-active {
+    transition: all 7s;
+  }
+  .slide-fade-leave-to {
+    transform: translateY(-100%);
   }
 
 </style>
@@ -100,7 +138,8 @@
       return {
         combination: '',
         wrongNumber: false,
-        rightNumber: false
+        rightNumber: false,
+        openDoor: false
       }
     },
     methods: {
@@ -119,12 +158,20 @@
         if (this.isOk(this.combination)) {
           this.rightNumber = true
           this.wrongNumber = false
+          const self = this
+          window.setTimeout(function () {
+            console.log('setting open door')
+            self.openDoor = true
+            console.log(this)
+          }, 1000)
         } else if ((this.combination.length === 4)) {
           this.wrongNumber = true
           this.rightNumber = false
+          this.openDoor = false
         } else {
           this.wrongNumber = false
           this.rightNumber = false
+          this.openDoor = false
         }
       },
       isOk (value) {
