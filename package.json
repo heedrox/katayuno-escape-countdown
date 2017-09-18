@@ -2,7 +2,7 @@
   "name": "katayuno-escape-countdown",
   "version": "1.0.0",
   "description": "The counter and keypad for Katayuno Escape Edition",
-  "author": "Jordi Marti @itortv / Mikel Torres @ojoven",
+  "author": "Jordi Marti @itortv @Grupo_init / Mikel Torres @ojoven",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -15,6 +15,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "@nylira/vue-countdown": "^2.1.1",
     "vue": "^2.3.2",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.0",
