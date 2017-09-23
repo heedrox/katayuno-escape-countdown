@@ -1,5 +1,9 @@
+import Vue from 'vue'
 import Envelope from '@/components/envelope/Envelope.vue'
 import { mount } from 'avoriaz'
+import VueResource from 'vue-resource'
+import { givenHttpMethodReturns, restoreHttpMethod } from '../utils'
+Vue.use(VueResource)
 
 describe('Envelope.vue', () => {
   let wrapper
@@ -32,12 +36,15 @@ describe('Envelope.vue', () => {
       expect(vm.state).to.eql('open')
     })
   })
-  it("sets content of modal when opening", () => {
+  it('fills modal with contents from content-src', () => {
+    givenHttpMethodReturns('get', {body: 'thisContent'})
     vm.state = 'closed'
     vm.contentSrc = '/static/file.html'
 
     vm.triggerState()
 
-    expect(vm.)
+    expect(Vue.http.get).to.have.been.calledWith('/static/file.html')
+    expect(vm.modal.text).to.equal('thisContent')
+    restoreHttpMethod('get')
   })
 })
