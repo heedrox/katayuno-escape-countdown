@@ -32,4 +32,12 @@ describe('Envelope.vue', () => {
       expect(vm.state).to.eql('open')
     })
   })
+  it("sets content of modal when opening", () => {
+    vm.state = 'closed'
+    vm.contentSrc = '/static/file.html'
+
+    vm.triggerState()
+
+    expect(vm.)
+  })
 })

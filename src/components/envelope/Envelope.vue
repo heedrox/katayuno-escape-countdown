@@ -3,7 +3,7 @@
       <img v-if="state === 'closed'" src="./envelope-closed.png">
       <img v-if="state === 'open'" src="./envelope-open.png">
       <div class="envelope-number-holder">{{number}}</div>
-      <modal class="envelope-modal" :title="modal.title" v-model="modal.visible" :bg-click="true" transition="bounce" :only-body="true" :verify="false" :content-style="modal.contentStyle" :modal-id="number">
+      <modal class="envelope-modal" :title="modal.title" v-model="modal.visible" :bg-click="true" transition="bounce" :only-body="true" :verify="false" :content-style="modal.contentStyle" :modal-id="modal.id">
         {{modal.text}}
       </modal>
     </div>
@@ -50,7 +50,20 @@
       Modal
     },
     name: 'envelope',
-    props: [ 'number', 'content-url' ],
+    props: {
+      number: {
+        type: String,
+        default () {
+          return '1'
+        }
+      },
+      contentSrc: {
+        type: String,
+        default () {
+          return ''
+        }
+      }
+    },
     data () {
       return {
         state: 'closed',
@@ -61,7 +74,8 @@
             width: '80%',
             marginLeft: '10%',
             top: '10px'
-          }
+          },
+          id: Math.floor(Math.random() * 20000)
         }
       }
     },
