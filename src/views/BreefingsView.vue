@@ -1,12 +1,12 @@
 <template>
   <div class="briefings-view">
     <div class="briefings-row">
-      <envelope content-src="/static/P/index.html" number="P"></envelope>
-      <envelope content-src="/static/1/index.html" number="1"></envelope>
+      <envelope content-src="/static/envelope-content/P/index.html" number="P"></envelope>
+      <envelope content-src="/static/envelope-content/1/index.html" number="1"></envelope>
     </div>
     <div class="briefings-row">
-      <envelope content-src="/static/2/index.html" number="2"></envelope>
-      <envelope content-src="/static/3/index.html" number="3"></envelope>
+      <envelope content-src="/static/envelope-content/2/index.html" number="2"></envelope>
+      <envelope content-src="/static/envelope-content/3/index.html" number="3"></envelope>
     </div>
   </div>
 </template>

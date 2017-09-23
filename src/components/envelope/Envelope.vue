@@ -4,8 +4,8 @@
     <img v-if="state === 'open'" src="./envelope-open.png">
     <div class="envelope-number-holder">{{number}}</div>
     <modal class="envelope-modal" :title="modal.title" v-model="modal.visible" :bg-click="true" transition="bounce"
-           :only-body="true" :verify="false" :content-style="modal.contentStyle" :modal-id="modal.id">
-      {{modal.text}}
+           :only-body="true" :verify="false" :content-style="modal.contentStyle" :body-style="modal.bodyStyle" :modal-id="modal.id">
+      <div v-html="modal.text"></div>
     </modal>
   </div>
 </template>
@@ -74,7 +74,11 @@
           contentStyle: {
             width: '80%',
             marginLeft: '10%',
-            top: '10px'
+            top: '10px',
+            height: '90vh'
+          },
+          bodyStyle: {
+            maxHeight: '90vh'
           },
           id: Math.floor(Math.random() * 20000)
         }
