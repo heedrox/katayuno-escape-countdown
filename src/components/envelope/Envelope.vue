@@ -3,6 +3,9 @@
       <img v-if="state === 'closed'" src="./envelope-closed.png">
       <img v-if="state === 'open'" src="./envelope-open.png">
       <div class="envelope-number-holder">{{number}}</div>
+      <modal class="envelope-modal" :title="modal.title" v-model="modal.visible" :bg-click="true" transition="bounce" :only-body="true" :verify="false" :content-style="modal.contentStyle" :modal-id="number">
+        {{modal.text}}
+      </modal>
     </div>
 </template>
 <style scoped>
@@ -10,6 +13,12 @@
 
   .envelope img {
     max-width:30vw;
+  }
+
+  .envelope .envelope-modal {
+    position: absolute;
+    top: 25vh;
+    left: 0px;
   }
 
   .envelope .envelope-number-holder {
@@ -34,17 +43,34 @@
   }
 </style>
 <script>
+  import Modal from 'vue2-flexible-modal'
+
   export default {
+    components: {
+      Modal
+    },
     name: 'envelope',
-    props: [ 'number' ],
+    props: [ 'number', 'content-url' ],
     data () {
       return {
-        state: 'closed'
+        state: 'closed',
+        modal: {
+          visible: false,
+          text: '... loading briefing ...',
+          contentStyle: {
+            width: '80%',
+            marginLeft: '10%',
+            top: '10px'
+          }
+        }
       }
     },
     methods: {
       triggerState () {
         this.state = this.state === 'open' ? 'closed' : 'open'
+        if (this.state === 'open') {
+          this.modal.visible = true
+        }
       }
     }
   }
