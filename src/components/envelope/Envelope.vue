@@ -1,6 +1,6 @@
 <template>
     <div class="envelope">
-      <img src="./envelope.png">
+      <img src="./envelope-closed.png">
       <div class="envelope-number-holder">{{number}}</div>
     </div>
 </template>
