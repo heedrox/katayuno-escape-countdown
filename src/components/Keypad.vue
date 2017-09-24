@@ -147,7 +147,7 @@
       relativeKeyboardCoords: {
         type: Array,
         default () {
-          return [0, 0, 640, 480]
+          return [0, 0, 100, 100]
         }
       },
       textDone: {
@@ -160,6 +160,12 @@
         type: String,
         default () {
           return ''
+        }
+      },
+      numberOfDigits: {
+        type: Number,
+        default () {
+          return 4
         }
       }
     },
@@ -178,7 +184,7 @@
         const value = getValueBasedOnRowAndCol(rowcol)
         if (value === 'E') {
           this.combination = ''
-        } else if (this.combination.length < 4) {
+        } else if (this.combination.length < this.numberOfDigits) {
           this.combination = this.combination + value + ''
         }
         this.checkCombination()
@@ -191,7 +197,7 @@
           window.setTimeout(function () {
             self.openDoor = true
           }, 1000)
-        } else if ((this.combination.length === 4)) {
+        } else if ((this.combination.length === this.numberOfDigits)) {
           this.wrongNumber = true
           this.rightNumber = false
           this.openDoor = false
@@ -202,7 +208,7 @@
         }
       },
       isOk (value) {
-        if (this.combination.length < 4) return false
+        if (this.combination.length < this.numberOfDigits) return false
         return bcrypt.compareSync(value, this.combinationHash)
       }
     }
