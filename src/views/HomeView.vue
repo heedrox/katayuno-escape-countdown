@@ -8,7 +8,7 @@
       <li><a href="countdown" target="_blank">The 3 hour countdown timer</a></li>
       <li><a href="keypad1" target="_blank">The keypad Room 1</a></li>
       <li><a href="keypad2" target="_blank">The keypad Room 2</a></li>
-      <li><a href="keypad3" target="_blank">The final keypad</a></li>
+      <li><a href="keypad3" target="_blank">The kataboom! keypad</a></li>
     </ul>
     <p> - Open the envelope with the MISSION BRIEFING <b>P</b> AND <b>NUMBER 1</b>.</p>
     <p> - Read it carefully, and make sure you know what to do. Breathe deeply.</p>
