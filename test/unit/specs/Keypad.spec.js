@@ -16,8 +16,10 @@ const mouseClickOnXY = (x, y) => {
 
 const CLICK_1 = mouseClickOnXY(150, 136)
 const CLICK_5 = mouseClickOnXY(190, 180)
+const CLICK_6 = mouseClickOnXY(230, 180)
 const CLICK_E = mouseClickOnXY(150, 260)
-// const SECRET_NUMBER = [mouseClickOnXY(x, x), mouseClickOnXY(x, x), mouseClickOnXY(x, x), mouseClickOnXY(x, x)]
+const HASH_1616 = '$2a$10$Bt0aWaFK7TQY3KsCmW9CquU.5PxS8jcm174lklUHPSkbEzm5ZeLjC'
+const CLICK_1616 = [CLICK_1, CLICK_6, CLICK_1, CLICK_6]
 
 describe('Keypad.vue', () => {
   let wrapper
@@ -136,12 +138,16 @@ describe('Keypad.vue', () => {
 
       expect(vm.wrongNumber).to.equal(true)
     })
-    /* it('checks when right', () => {
-      SECRET_NUMBER.forEach((click) => {
+    it('checks when right', () => {
+      wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
+      wrapper.vm.combinationHash = HASH_1616
+      CLICK_1616.forEach((click) => {
         wrapper.vm.keypadClick(click)
       })
 
+      expect(vm.combination).to.equal('1616')
       expect(vm.rightNumber).to.equal(true)
-    }) */
+    })
   })
 })

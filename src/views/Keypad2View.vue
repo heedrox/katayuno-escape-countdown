@@ -1,5 +1,6 @@
 <template>
-  <escape-keypad :text-done="textDone" :relative-keyboard-coords="[32,52,67,92]" skin="/static/keypad-skins/keypad2.png" class="main-keypad2"></escape-keypad>
+  <escape-keypad :text-done="textDone" :relative-keyboard-coords="[32,52,67,92]" skin="/static/keypad-skins/keypad2.png"
+                 class="main-keypad2" combination-hash="$2a$10$H.1y7AcOS3GaLHpHxW1lr.9F3yXitqqvFfy1WHChGP9cnM.wA..8y"></escape-keypad>
 </template>
 <style>
   .main-keypad2 {

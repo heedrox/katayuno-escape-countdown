@@ -155,6 +155,12 @@
         default () {
           return ''
         }
+      },
+      combinationHash: {
+        type: String,
+        default () {
+          return ''
+        }
       }
     },
     data () {
@@ -197,7 +203,7 @@
       },
       isOk (value) {
         if (this.combination.length < 4) return false
-        return bcrypt.compareSync(value, '$2a$08$GnZouCpA1PtQ6MzfqkjnseGijHbkk7iCBvTiH3lCKXcte6N/xEh7O')
+        return bcrypt.compareSync(value, this.combinationHash)
       }
     }
   }
