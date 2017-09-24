@@ -9,7 +9,7 @@
       <li><a href="keypad1" target="_blank">The keypad Room 1</a></li>
       <li><a href="keypad2" target="_blank">The keypad Room 2</a></li>
     </ul>
-    <p> - Open the envelope with the MISSION BRIEFING NUMBER 1.</p>
+    <p> - Open the envelope with the MISSION BRIEFING <b>P</b> AND <b>NUMBER 1</b>.</p>
     <p> - Read it carefully, and make sure you know what to do. Breathe deeply.</p>
     <p> - Go to the countdown timer tab, and press START. Do not stop it unless it's an emergency.</p>
     <p> - Follow instructions of the mission during the following 3 hours. Good luck, Agent!</p>
