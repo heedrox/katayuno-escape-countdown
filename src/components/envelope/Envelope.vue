@@ -78,7 +78,7 @@
             height: '90vh'
           },
           bodyStyle: {
-            maxHeight: '90vh'
+            maxHeight: '85vh'
           },
           id: Math.floor(Math.random() * 20000)
         }
@@ -88,10 +88,8 @@
       triggerState () {
         this.state = this.state === 'open' ? 'closed' : 'open'
         if (this.state === 'open') {
-          console.log('open!')
           this.modal.visible = true
           this.$http.get(this.contentSrc).then((response) => {
-            console.log('response', response)
             this.modal.text = response.body
           })
         }
