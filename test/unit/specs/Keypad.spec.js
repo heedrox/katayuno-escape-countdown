@@ -1,6 +1,8 @@
 import Keypad from '@/components/Keypad'
 import { mount } from 'avoriaz'
 
+const TIME_1_SEC = 1000
+
 const keypadTargetCoordinates = () => {
   return {
     getBoundingClientRect: () => { return {top: 100, right: 0, bottom: 0, left: 100, width: 200, height: 200} }
@@ -138,16 +140,35 @@ describe('Keypad.vue', () => {
 
       expect(vm.wrongNumber).to.equal(true)
     })
-    it('checks when right', () => {
-      wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+    describe('when right combination', () => {
+      beforeEach(() => {
+        wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
 
-      wrapper.vm.combinationHash = HASH_1616
-      CLICK_1616.forEach((click) => {
-        wrapper.vm.keypadClick(click)
+        wrapper.vm.combinationHash = HASH_1616
       })
+      it('sets right number', () => {
+        CLICK_1616.forEach((click) => {
+          wrapper.vm.keypadClick(click)
+        })
 
-      expect(vm.combination).to.equal('1616')
-      expect(vm.rightNumber).to.equal(true)
+        expect(vm.combination).to.equal('1616')
+        expect(vm.rightNumber).to.equal(true)
+      })
+      it('opens door after 1 sec', () => {
+        let sandbox = sinon.sandbox.create()
+        let clock = sinon.useFakeTimers()
+
+        CLICK_1616.forEach((click) => {
+          wrapper.vm.keypadClick(click)
+        })
+
+        expect(vm.openDoor).to.equal(false)
+        clock.tick(TIME_1_SEC)
+        expect(vm.openDoor).to.equal(true)
+
+        sandbox.restore()
+        clock.restore()
+      })
     })
   })
 })
