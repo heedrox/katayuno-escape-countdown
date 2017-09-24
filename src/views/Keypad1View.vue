@@ -1,9 +1,14 @@
 <template>
-  <escape-keypad :relative-keyboard-coords="[20,12,80,85]" skin="/static/keypad-skins/keypad1.png" class="main-keypad"></escape-keypad>
+  <escape-keypad :text-done="textDone" :relative-keyboard-coords="[20,12,80,85]" skin="/static/keypad-skins/keypad1.png"
+                 class="main-keypad"></escape-keypad>
 </template>
 <style>
   .main-keypad {
     width: 100%;
+  }
+  .main-keypad .under-door p {
+    padding-top: 10vh;
+    font-size: 6vw;
   }
 </style>
 <script>
@@ -12,6 +17,11 @@
   export default {
     components: {
       EscapeKeypad
+    },
+    data () {
+      return {
+        textDone: '<p>¡Enhorabuena!</p><p>Has demostrado ser un buen agente.<br/>Abre ahora el sobre 2.<br/><br/>¡Date prisa, el tiempo se acaba!</p>'
+      }
     }
   }
 </script>

@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div class="under-door">
-      <p>¡Enhorabuena!</p>
-      <p>Has demostrado ser un buen agente.<br/>
-      Abre ahora el sobre 2.<br/><br/>
-      ¡Date prisa, el tiempo se acaba!</p>
+    <div class="under-door" v-html="textDone">
+      <p></p>
     </div>
     <transition name="slide-fade">
       <div v-if="!openDoor" class="keypad">
@@ -24,10 +21,6 @@
     z-index:2;
     width:100%;
     height:100%;
-  }
-  .under-door p {
-    padding-top: 10vh;
-    font-size: 6vw;
   }
   .keypad {
     z-index:10;
@@ -90,7 +83,6 @@
   import bcrypt from 'bcryptjs'
 
   const getValueBasedOnRowAndCol = (rowcol) => {
-    console.log('rowcol', rowcol)
     switch (rowcol.join('')) {
       case '11': return '1'
       case '12': return '2'
@@ -115,7 +107,6 @@
     const minimum = minMax[0]
     const maximum = minMax[1]
     const interval = Math.floor((maximum - minimum) / 4)
-    console.log('min,max,interval,ypos', minimum, maximum, interval, ypos)
     if (ypos < minimum) return 0
     if (ypos < minimum + interval) return 1
     if (ypos < minimum + 2 * interval) return 2
@@ -158,6 +149,12 @@
         default () {
           return [0, 0, 640, 480]
         }
+      },
+      textDone: {
+        type: String,
+        default () {
+          return ''
+        }
       }
     },
     data () {
@@ -186,9 +183,7 @@
           this.wrongNumber = false
           const self = this
           window.setTimeout(function () {
-            console.log('setting open door')
             self.openDoor = true
-            console.log(this)
           }, 1000)
         } else if ((this.combination.length === 4)) {
           this.wrongNumber = true
