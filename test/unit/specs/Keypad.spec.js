@@ -51,6 +51,35 @@ describe('Keypad.vue', () => {
     ]
     DATASET.forEach((data) => {
       it('detects ' + data.expected, () => {
+        wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+        wrapper.vm.keypadClick(mouseClickOnXY(data.x, data.y))
+
+        expect(vm.combination).to.equal(data.expected)
+      })
+    })
+  })
+  describe('with different keyboard coords', () => {
+    const DATASET = [
+      {x: 150, y: 130, expected: ''},
+      {x: 185, y: 155, expected: '1'},
+      {x: 205, y: 155, expected: '2'},
+      {x: 225, y: 155, expected: '3'},
+      {x: 305, y: 155, expected: ''},
+      {x: 185, y: 180, expected: '4'},
+      {x: 205, y: 180, expected: '5'},
+      {x: 225, y: 180, expected: '6'},
+      {x: 185, y: 205, expected: '7'},
+      {x: 205, y: 205, expected: '8'},
+      {x: 225, y: 205, expected: '9'},
+      {x: 185, y: 230, expected: ''},
+      {x: 205, y: 230, expected: '0'},
+      {x: 225, y: 230, expected: ''},
+      {x: 250, y: 130, expected: ''},
+      {x: 250, y: 300, expected: ''}
+    ]
+    DATASET.forEach((data) => {
+      it('detects ' + data.expected, () => {
+        wrapper.vm.relativeKeyboardCoords = [40, 25, 70, 75]
         wrapper.vm.keypadClick(mouseClickOnXY(data.x, data.y))
 
         expect(vm.combination).to.equal(data.expected)
@@ -58,12 +87,16 @@ describe('Keypad.vue', () => {
     })
   })
   it('adds numbers pressed', () => {
+    wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
     wrapper.vm.keypadClick(CLICK_1)
     wrapper.vm.keypadClick(CLICK_5)
 
     expect(vm.combination).to.equal('15')
   })
   it('does not exceed 4 numbers', () => {
+    wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
     wrapper.vm.keypadClick(CLICK_1)
     wrapper.vm.keypadClick(CLICK_5)
     wrapper.vm.keypadClick(CLICK_1)
@@ -74,6 +107,8 @@ describe('Keypad.vue', () => {
     expect(vm.combination).to.equal('1515')
   })
   it('removes when pressed E', () => {
+    wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
     wrapper.vm.keypadClick(CLICK_1)
     wrapper.vm.keypadClick(CLICK_5)
 
@@ -83,6 +118,8 @@ describe('Keypad.vue', () => {
   })
   describe('checks combination', () => {
     it('checks when length<4', () => {
+      wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
       wrapper.vm.keypadClick(CLICK_1)
       wrapper.vm.keypadClick(CLICK_5)
 
@@ -90,6 +127,8 @@ describe('Keypad.vue', () => {
       expect(vm.rightNumber).to.equal(false)
     })
     it('checks when wrong', () => {
+      wrapper.vm.relativeKeyboardCoords = [20, 12, 80, 85]
+
       wrapper.vm.keypadClick(CLICK_1)
       wrapper.vm.keypadClick(CLICK_5)
       wrapper.vm.keypadClick(CLICK_1)

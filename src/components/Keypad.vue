@@ -9,7 +9,7 @@
     <transition name="slide-fade">
       <div v-if="!openDoor" class="keypad">
         <input v-bind:class="{ 'danger': wrongNumber, 'success': rightNumber }" size="8" readonly id="keypadValue" v-model="combination">
-        <img id="keypadImage" src="../assets/keypad.png" v-on:click="keypadClick">
+        <img id="keypadImage" :src="skin" v-on:click="keypadClick">
       </div>
     </transition>
   </div>
@@ -90,6 +90,7 @@
   import bcrypt from 'bcryptjs'
 
   const getValueBasedOnRowAndCol = (rowcol) => {
+    console.log('rowcol', rowcol)
     switch (rowcol.join('')) {
       case '11': return '1'
       case '12': return '2'
@@ -107,33 +108,58 @@
     return ''
   }
 
-  const getRow = (ypos) => {
-    if (ypos < 13) return 0
-    if (ypos < 34) return 1
-    if (ypos < 50) return 2
-    if (ypos < 70) return 3
-    if (ypos < 84) return 4
+  const xMinMax = (coords) => [ coords[0], coords[2] ]
+  const yMinMax = (coords) => [ coords[1], coords[3] ]
+
+  const getRow = (ypos, minMax) => {
+    const minimum = minMax[0]
+    const maximum = minMax[1]
+    const interval = Math.floor((maximum - minimum) / 4)
+    console.log('min,max,interval,ypos', minimum, maximum, interval, ypos)
+    if (ypos < minimum) return 0
+    if (ypos < minimum + interval) return 1
+    if (ypos < minimum + 2 * interval) return 2
+    if (ypos < minimum + 3 * interval) return 3
+    if (ypos < minimum + 4 * interval) return 4
     return 0
   }
 
-  const getCol = (xpos) => {
-    if (xpos < 20) return 0
-    if (xpos < 40) return 1
-    if (xpos < 60) return 2
-    if (xpos < 80) return 3
+  const getCol = (xpos, minMax) => {
+    const minimum = minMax[0]
+    const maximum = minMax[1]
+    const interval = Math.floor((maximum - minimum) / 3)
+
+    if (xpos < minimum) return 0
+    if (xpos < minimum + interval) return 1
+    if (xpos < minimum + 2 * interval) return 2
+    if (xpos < minimum + 3 * interval) return 3
     return 0
   }
 
-  const getKeypadRowAndCol = (posx, posy, coordinates) => {
+  const getKeypadRowAndCol = (posx, posy, coordinates, relativeKeyboardCoords) => {
     const imageXClicked = posx - coordinates.left
     const relativeXClickedPosition = Math.round((imageXClicked / coordinates.width) * 100)
     const imageYClicked = posy - coordinates.top
     const relativeYClickedPosition = Math.round((imageYClicked / coordinates.height) * 100)
-    return [getRow(relativeYClickedPosition), getCol(relativeXClickedPosition)]
+    return [getRow(relativeYClickedPosition, yMinMax(relativeKeyboardCoords)), getCol(relativeXClickedPosition, xMinMax(relativeKeyboardCoords))]
   }
 
   export default {
     name: 'escape-keypad',
+    props: {
+      skin: {
+        type: String,
+        default () {
+          return ''
+        }
+      },
+      relativeKeyboardCoords: {
+        type: Array,
+        default () {
+          return [0, 0, 640, 480]
+        }
+      }
+    },
     data () {
       return {
         combination: '',
@@ -144,8 +170,8 @@
     },
     methods: {
       keypadClick (x) {
-        const coordinates = x.target.getBoundingClientRect()
-        const rowcol = getKeypadRowAndCol(x.pageX, x.pageY, coordinates)
+        const clickCoordinates = x.target.getBoundingClientRect()
+        const rowcol = getKeypadRowAndCol(x.pageX, x.pageY, clickCoordinates, this.relativeKeyboardCoords)
         const value = getValueBasedOnRowAndCol(rowcol)
         if (value === 'E') {
           this.combination = ''
