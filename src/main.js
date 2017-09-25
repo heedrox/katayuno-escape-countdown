@@ -5,10 +5,12 @@ import { sync } from 'vuex-router-sync'
 import store from './store'
 import router from './router'
 import App from './App'
+import VueResource from 'vue-resource'
 
 sync(store, router)
 
 Vue.config.productionTip = false
+Vue.use(VueResource)
 
 /* eslint-disable no-new */
 new Vue({

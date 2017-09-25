@@ -5,12 +5,10 @@
 </style>
 <script>
   import EscapeCountdown from '../components/Countdown.vue'
-  import EscapeKeypad from '../components/Keypad.vue'
 
   export default {
     components: {
-      EscapeCountdown,
-      EscapeKeypad
+      EscapeCountdown
     }
   }
 </script>

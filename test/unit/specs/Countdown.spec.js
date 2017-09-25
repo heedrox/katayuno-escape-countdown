@@ -49,7 +49,7 @@ describe('Countdown.vue', () => {
     expect(vm.seconds).to.equal('00')
     expect(vm.paused).to.equal(false)
   })
-  it('shoudl say 2-57-50 when 130 secs pass', () => {
+  it('should say 2-57-50 when 130 secs pass', () => {
     whenTrigger('click', '#playButton', wrapper)
     clock.tick(130000)
 

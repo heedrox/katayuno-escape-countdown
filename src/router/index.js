@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import HomeView from '../views/HomeView'
-import SoonView from '../views/SoonView'
+import HomeView from '../views/HomeView.vue'
+import SoonView from '../views/SoonView.vue'
+import BriefingsView from '../views/BreefingsView.vue'
 import CountdownView from '../views/CountdownView.vue'
-import KeypadView from '../views/KeypadView.vue'
+import Keypad1View from '../views/Keypad1View.vue'
+import Keypad2View from '../views/Keypad2View.vue'
+import Keypad3View from '../views/Keypad3View.vue'
 
 Vue.use(Router)
 
@@ -17,10 +20,19 @@ export default new Router({
     path: '/home',
     component: HomeView
   }, {
+    path: '/briefings',
+    component: BriefingsView
+  }, {
     path: '/countdown',
     component: CountdownView
   }, {
-    path: '/keypad',
-    component: KeypadView
+    path: '/keypad1',
+    component: Keypad1View
+  }, {
+    path: '/keypad2',
+    component: Keypad2View
+  }, {
+    path: '/keypad3',
+    component: Keypad3View
   }]
 })
