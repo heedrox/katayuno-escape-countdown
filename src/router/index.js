@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
-import SoonView from '../views/SoonView.vue'
 import BriefingsView from '../views/BreefingsView.vue'
 import CountdownView from '../views/CountdownView.vue'
 import Keypad1View from '../views/Keypad1View.vue'
@@ -15,7 +14,7 @@ export default new Router({
   mode: 'history',
   routes: [{
     path: '/',
-    component: SoonView
+    component: HomeView
   }, {
     path: '/home',
     component: HomeView
