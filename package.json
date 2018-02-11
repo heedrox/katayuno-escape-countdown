@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nylira/vue-countdown": "^2.1.1",
+    "ejs": "^2.5.5",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "vue": "^2.3.2",
