@@ -45,6 +45,7 @@
     "cross-env": "^4.0.0",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.7",
+    "ejs": "^2.5.5",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-standard": "^6.2.1",
